@@ -93,7 +93,6 @@ human_df_corr$Hypertrophy_Score <- rowMeans(scale(human_df_corr[, human_valid_ma
 p_human_corr <- ggplot(human_df_corr, aes(x = CRL2_Score, y = Hypertrophy_Score)) +
   geom_point(fill = "gray60", shape = 21, color = "black", size = 3.5, stroke = 0.8, alpha = 0.8) +
   geom_smooth(method = "lm", color = "black", fill = "gray40", alpha = 0.2) +
-  # 关键修改：设置 cor.coef.name = "r"
   stat_cor(method = "pearson", label.x.npc = "center", label.y.npc = "top", size = 6, cor.coef.name = "r") +
   theme_classic() +
   labs(title = "Correlation between CRL2/N-degron score and fetal gene program", 
@@ -101,7 +100,6 @@ p_human_corr <- ggplot(human_df_corr, aes(x = CRL2_Score, y = Hypertrophy_Score)
        y = "Fetal gene program score (Z-score)") +
   theme(legend.position = "none", plot.title = element_text(hjust = 0.5, face = "bold"))
 
-# 打印数据及图形以供确认
 print(head(human_df_corr))
 print(p_human_corr)
 
@@ -190,7 +188,6 @@ if(length(mouse_valid_markers) > 1) {
 p_mouse_corr <- ggplot(mouse_corr_df, aes(x = CRL2_Score, y = Hypertrophy_Score)) +
   geom_point(fill = "gray60", shape = 21, color = "black", size = 4, stroke = 0.8, alpha = 0.9) +
   geom_smooth(method = "lm", color = "black", fill = "gray40", alpha = 0.2) +
-  # 关键修改：添加 cor.coef.name = "r"
   stat_cor(method = "pearson", label.x.npc = "center", label.y.npc = "top", size = 6, cor.coef.name = "r") +
   theme_classic() +
   labs(title = "Correlation between CRL2/N-degron score and fetal gene program (Mouse TAC)", 
@@ -198,7 +195,6 @@ p_mouse_corr <- ggplot(mouse_corr_df, aes(x = CRL2_Score, y = Hypertrophy_Score)
        y = "Fetal gene program score (Z-score)") +
   theme(legend.position = "none", plot.title = element_text(hjust = 0.5, face = "bold"))
 
-# 打印数据以供检查（遵循您的习惯）
 print(head(mouse_corr_df))
 print(p_mouse_corr)
 
@@ -214,18 +210,15 @@ p_mouse_corr <- ggplot(mouse_corr_df, aes(x = CRL2_Score, y = Hypertrophy_Score)
   stat_cor(method = "pearson", label.x.npc = "center", label.y.npc = "top", size = 6, cor.coef.name = "r") +
   theme_classic() +
   labs(
-    # 在 and 之前添加 \n 实现换行
     title = "Correlation between CRL2/N-degron score \nand fetal gene program (Mouse TAC)", 
     x = "CRL2/N-degron module score (Z-score)", 
     y = "Fetal gene program score (Z-score)"
   ) +
   theme(
     legend.position = "none", 
-    # lineheight 调整行间距，1.0 或 0.9 通常视觉效果较好
     plot.title = element_text(hjust = 0.5, face = "bold", lineheight = 1.0) 
   )
 
-# 打印数据和图形
 print(head(mouse_corr_df))
 print(p_mouse_corr)
 
