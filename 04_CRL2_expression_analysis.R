@@ -199,7 +199,7 @@ print(head(mouse_corr_df))
 print(p_mouse_corr)
 
 write_xlsx(mouse_corr_df, 
-           path = "C:/Users/Zouyi/Documents/Document/excel文件/mouse_corr_plot_data.xlsx")
+           path = "mouse_corr_plot_data.xlsx")
 
 
 
