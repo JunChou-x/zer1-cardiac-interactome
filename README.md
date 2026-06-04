@@ -48,25 +48,6 @@ Candidate ranking
 Visualization
 ```
 
----
-
-## Repository Structure
-
-```text
-ZER1_pipeline/
-│
-├── data/
-│   ├── ZER1_IPMS_significant_hits.xlsx
-│   └── Volcano_input.xlsx
-│
-├── results/
-│
-├── 01_sequence_annotation.R
-├── 02_GO_prioritization.R
-├── 03_visualization.R
-│
-└── README.md
-```
 
 ---
 
@@ -303,3 +284,134 @@ If you use this workflow in your research, please cite the corresponding publica
 ## License
 
 This project is distributed under the MIT License.
+
+
+
+
+
+
+# CRL2/N-degron Complex Validation in Heart Failure
+
+## Overview
+
+R workflow for analyzing CRL2/N-degron ubiquitin ligase activity in heart failure using human and mouse transcriptomic datasets.
+
+Analyses:
+- CRL2 complex gene expression
+- CRL2 signature score
+- Fetal gene program correlation
+- Cross-species validation
+
+---
+
+## Workflow
+
+Human DCM (GSE116250)      Mouse TAC (GSE203083)
+        │                          │
+        ▼                          ▼
+CRL2 gene expression      CRL2 gene expression
+        │                          │
+        ▼                          ▼
+CRL2 signature score      CRL2 signature score
+        │                          │
+        ▼                          ▼
+Fetal gene correlation    Fetal gene correlation
+        └──────────┬──────────────┘
+                   ▼
+        Cross-species comparison
+
+---
+
+
+## Datasets
+
+Human (GSE116250): NF vs DCM  
+Mouse (GSE203083): Sham vs TAC  
+
+---
+
+## CRL2 Complex Genes
+
+Human:
+ZER1, CUL2, TCEB1, TCEB2, RBX1, ZYG11B
+
+Mouse:
+Zer1, Cul2, Elob, Eloc, Rbx1, Zyg11b
+
+---
+
+## Analyses
+
+### Gene Expression
+- Log2(RPKM + 1)
+- Wilcoxon test (human), t-test (mouse)
+
+### CRL2 Signature Score
+- Gene-wise Z-score
+- Mean across genes
+
+### Fetal Gene Program
+- NPPA, NPPB, MYH7
+- Mean Z-score
+
+### Correlation
+- Pearson correlation (CRL2 vs fetal program)
+
+### Cross-species
+- Shared DE genes (human vs mouse)
+
+---
+
+## Outputs
+
+Human:
+- Human_CRL2_Genes.pdf
+- Human_CRL2_Score.pdf
+- Human_CRL2_FetalGene_Correlation.pdf
+
+Mouse:
+- Mouse_CRL2_Genes.pdf
+- Mouse_CRL2_Score.pdf
+- Mouse_CRL2_FetalGene_Correlation.pdf
+
+Cross-species:
+- CRL2_CrossSpecies_Venn.pdf
+
+---
+
+## Installation
+
+install.packages(c(
+  "readr","dplyr","tidyr","ggplot2",
+  "ggpubr","stringr","tibble","writexl"
+))
+
+---
+
+## Usage
+
+source("CRL2_validation.R")
+
+---
+
+## Statistics
+
+Human: Wilcoxon rank-sum test  
+Mouse: Student’s t-test  
+Correlation: Pearson (r, p)
+
+---
+
+## Biological Rationale
+
+CRL2/ZER1 regulates N-degron ubiquitin-mediated protein degradation.  
+This pipeline evaluates its association with cardiac remodeling and fetal gene reactivation across human and mouse heart failure.
+
+---
+
+## License
+
+MIT License
+
+
+
